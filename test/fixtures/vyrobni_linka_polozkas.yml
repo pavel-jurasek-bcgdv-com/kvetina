@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vyrobni_linka_id: 1
+  datum: 2017-04-29
+  dobre_kusy: 1
+  nok_ftf: 1
+  ok_ftf: 1
+  nok_rq: 1
+  rq: 1.5
+  rq_cil: 1.5
+  zm_rq: 1.5
+  ftf: 1.5
+  ftf_cil: 1
+  zm_ftf: 1
+  zmetky: 1
+  opakovany_test: 1
+  rework: 1
+
+two:
+  vyrobni_linka_id: 1
+  datum: 2017-04-29
+  dobre_kusy: 1
+  nok_ftf: 1
+  ok_ftf: 1
+  nok_rq: 1
+  rq: 1.5
+  rq_cil: 1.5
+  zm_rq: 1.5
+  ftf: 1.5
+  ftf_cil: 1
+  zm_ftf: 1
+  zmetky: 1
+  opakovany_test: 1
+  rework: 1
