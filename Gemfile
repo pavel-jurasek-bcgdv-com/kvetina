@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby "2.4.0"
+
 gem 'axlsx'
 gem "axlsx_rails"
 gem 'zip-zip'
