@@ -6,17 +6,18 @@
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \f0\fs22 \cf2 \cb3 \CocoaLigature0 nahrat denni report\
-1) nahrat novy soubor (nebo prepsat stary soubor denni-report.xlsx)\
+1) nahrat novy soubor (nebo prepsat stary soubor denni-report.xlsx) v ./podklady\
 2) otevrit aplikaci \'93terminal\'94\
 2b) cd /Users/tomas/Documents/kvetina/kvetina \
 3) git add . && git commit -m \'93test\'94 && git push origin master\
+3b) git push heroku master\
 4) heroku run rake kvetina:import[\'91podklady/denni-report.xlsx\'92]\
 \
 nahrat chyby za mesic\
-1) nahrat novy soubor (nebo prepsat stary soubor export-chyby.xlsx)\
+1) nahrat novy soubor (nebo prepsat stary soubor export-chyby.xlsx) v ./podklady\
 2) otevrit aplikaci \'93terminal\'94\
 2b) cd /Users/tomas/Documents/kvetina/kvetina \
 3) git add . && git commit -m \'93test\'94 && git push origin master\
-4) heroku run rake kvetina:import_errors[\'91OBC 2\'92, \'91podklady/export-chyby.xlsx\'92]\
+4) heroku run rake kvetina:import_errors['OBC 2','podklady/export-chyby2.xlsx']\
 \
 otevrit webovku: ./otevrit.sh}
