@@ -28,14 +28,26 @@ ActiveAdmin.register_page "Dashboard" do
     redirect_to admin_dashboard_path, notice: 'Hotovo :] Denni import done.'
   end
 
+  page_action :chyby_report_import_form2, method: :post do
+    render "chyby_report_import_form2"
+  end
+
+  page_action :chyby_report_import2, method: :post do
+    require 'rake'
+    Rails.application.load_tasks
+    Rake::Task["kvetina:import_errors"].reenable
+    Rake::Task["kvetina:import_errors"].invoke(params['import']['linka'], Rails.root.join('podklady/test.xslx').to_s)
+
+    redirect_to admin_dashboard_path, notice: 'Hotovo :] Chyby import done... Pocket chvilinku cca 3min'
+  end
+
   page_action :chyby_report_import, method: :post do
     uploaded = params['import']['data']
     File.open(Rails.root.join('podklady/test.xslx').to_s, 'w') do |file|
       file.write(uploaded.read)
     end
-    ImportWorker.perform_async(params['import']['linka'], Rails.root.join('podklady/test.xslx').to_s)
 
-    redirect_to admin_dashboard_path, notice: 'Hotovo :] Chyby import done... Pocket chvilinku cca 3min'
+    redirect_to admin_dashboard_chyby_report_import2_form_path, method: :get
   end
 
   action_item :export do

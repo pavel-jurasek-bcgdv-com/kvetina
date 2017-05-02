@@ -7,8 +7,6 @@ end
 
 ruby "2.4.0"
 
-gem 'sidekiq'
-gem 'unicorn'
 gem 'axlsx'
 gem "axlsx_rails"
 gem 'zip-zip'

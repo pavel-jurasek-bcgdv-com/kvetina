@@ -1,12 +1,12 @@
 <%=
 semantic_form_for(
   'import',
-  url: admin_dashboard_chyby_report_import_path,
+  url: admin_dashboard_chyby_report_import2_path,
   method: :post,
   html: { multipart: true }
 ) do |f| %>
   <%= f.inputs do %>
-    <%= f.input :data, as: :file %>
+    <%= f.input :linka, input_html: { value: 'OBC 2' } %>
   <% end %>
   <%= f.actions %>
 <% end %>
