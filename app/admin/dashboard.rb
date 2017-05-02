@@ -11,8 +11,42 @@ ActiveAdmin.register_page "Dashboard" do
     )
   end
 
+  page_action :denni_report_import_form, method: :get do
+    render "denni_report_import_form"
+  end
+
+  page_action :chyby_report_import_form, method: :get do
+    render "chyby_report_import_form"
+  end
+
+  page_action :denni_report_import, method: :post do
+    require 'rake'
+    Rails.application.load_tasks
+    Rake::Task["kvetina:import"].reenable
+    Rake::Task["kvetina:import"].invoke(params['import']['data'].path)
+
+    redirect_to admin_dashboard_path, notice: 'Hotovo :] Denni import done.'
+  end
+
+  page_action :chyby_report_import, method: :post do
+    require 'rake'
+    Rails.application.load_tasks
+    Rake::Task["kvetina:import_errors"].reenable
+    Rake::Task["kvetina:import_errors"].invoke(params['import']['linka'], params['import']['data'].path)
+
+    redirect_to admin_dashboard_path, notice: 'Hotovo :] Chyby import done.'
+  end
+
   action_item :export do
     link_to "Export", admin_dashboard_export_path, method: :post
+  end
+
+  action_item :denni_report_import do
+    link_to "Denni report import", admin_dashboard_denni_report_import_form_path, method: :get
+  end
+
+  action_item :chyby_report_import do
+    link_to "Chyby report import", admin_dashboard_chyby_report_import_form_path, method: :get
   end
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
