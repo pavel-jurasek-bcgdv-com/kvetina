@@ -1,7 +1,5 @@
 :verbose: true
 :concurrency: 25
-:logfile: ./log/sidekiq.log
-:pidfile: ./tmp/pids/sidekiq.pid
 :timeout: 90
 :queues:
   - [import_worker, 10]
