@@ -20,34 +20,19 @@ ActiveAdmin.register_page "Dashboard" do
   end
 
   page_action :denni_report_import, method: :post do
-    require 'rake'
-    Rails.application.load_tasks
-    Rake::Task["kvetina:import"].reenable
-    Rake::Task["kvetina:import"].invoke(params['import']['data'].path)
+    IO.binwrite(Rails.root.join('tmp','test_temp.xslx').to_s, params['import']['data'].read)
+
+    spawn("rake kvetina:import['" + Rails.root.join('tmp','test_temp.xslx').to_s + "']")
 
     redirect_to admin_dashboard_path, notice: 'Hotovo :] Denni import done.'
   end
 
-  page_action :chyby_report_import_form2, method: :post do
-    render "chyby_report_import_form2"
-  end
-
-  page_action :chyby_report_import2, method: :post do
-    require 'rake'
-    Rails.application.load_tasks
-    Rake::Task["kvetina:import_errors"].reenable
-    Rake::Task["kvetina:import_errors"].invoke(params['import']['linka'], Rails.root.join('tmp/test.xslx').to_s)
-
-    redirect_to admin_dashboard_path, notice: 'Hotovo :] Chyby import done... Pocket chvilinku cca 3min'
-  end
-
   page_action :chyby_report_import, method: :post do
-    uploaded = params['import']['data']
-    File.open(Rails.root.join('tmp/test.xslx').to_s, 'w') do |file|
-      file.write(uploaded.read)
-    end
+    IO.binwrite(Rails.root.join('tmp','test_temp2.xslx').to_s, params['import']['data'].read)
 
-    redirect_to admin_dashboard_chyby_report_import2_form_path, method: :get
+    spawn("rake kvetina:import_errors['" + params['import']['linka'] + "','" + Rails.root.join('tmp','test_temp2.xslx').to_s + "']")
+
+    redirect_to admin_dashboard_path, notice: 'Hotovo :] Chyby import done.'
   end
 
   action_item :export do
