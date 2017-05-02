@@ -36,14 +36,14 @@ ActiveAdmin.register_page "Dashboard" do
     require 'rake'
     Rails.application.load_tasks
     Rake::Task["kvetina:import_errors"].reenable
-    Rake::Task["kvetina:import_errors"].invoke(params['import']['linka'], Rails.root.join('podklady/test.xslx').to_s)
+    Rake::Task["kvetina:import_errors"].invoke(params['import']['linka'], Rails.root.join('tmp/test.xslx').to_s)
 
     redirect_to admin_dashboard_path, notice: 'Hotovo :] Chyby import done... Pocket chvilinku cca 3min'
   end
 
   page_action :chyby_report_import, method: :post do
     uploaded = params['import']['data']
-    File.open(Rails.root.join('podklady/test.xslx').to_s, 'w') do |file|
+    File.open(Rails.root.join('tmp/test.xslx').to_s, 'w') do |file|
       file.write(uploaded.read)
     end
 
